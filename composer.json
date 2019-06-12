@@ -1,18 +1,6 @@
 {
     "name": "ajg/crm_authentication",
     "description": "This is an authentication system built off of the CRM plain-text based authentication.",
-    "authors": [
-        {
-            "name": "Andrew Gosselin",
-            "email": "andrew.gosselin@ntautoservices.com"
-        }
-    ],
-    "require": {}
-}
-
-{
-    "name": "ajg/crm_authentication",
-    "description": "This is an authentication system built off of the CRM plain-text based authentication.",
     "homepage": "https://github.com/NT-andrewgosselin/CRM-Authentication-Package",
     "license": "MIT",
     "authors": [
@@ -22,7 +10,7 @@
             "role": "Developer"
         }
     ],
-    "require": {}
+    "require": {},
     "autoload": {
         "psr-0": {
             "AJG\\CRM_Authentication\\": "src/"
