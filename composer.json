@@ -1,0 +1,11 @@
+{
+    "name": "ajg/crm_authentication",
+    "description": "This is an authentication system built off of the CRM plain-text based authentication.",
+    "authors": [
+        {
+            "name": "Andrew Gosselin",
+            "email": "andrew.gosselin@ntautoservices.com"
+        }
+    ],
+    "require": {}
+}
