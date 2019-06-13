@@ -10,13 +10,26 @@ class CrmAuthUsersTable extends Migration
     {
         Schema::create('crm_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->nullable();
+            $table->string('user_id')->nullable();
             $table->string('username')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('email')->nullable();
             $table->string('role')->nullable();
             $table->string('token', 25)->nullable();
+            $extra_fields = config('crm_authentication.main.user_extra_fields');
+            foreach ($extra_fields['boolean'] as $field) {
+                $table->longText($field)->nullable();
+            }
+            foreach ($extra_fields['string'] as $field) {
+                $table->longText($field)->nullable();
+            }
+            foreach ($extra_fields['longText'] as $field) {
+                $table->longText($field)->nullable();
+            }
+            foreach ($extra_fields['integer'] as $field) {
+                $table->integer($field)->nullable();
+            }
             $table->timestamps();
         });
     }

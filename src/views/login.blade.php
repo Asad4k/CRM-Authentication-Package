@@ -40,13 +40,13 @@
                                 <input type="password" class="form-control form-control-lg rounded-0" id="passwordInput" required="" autocomplete="new-password">
                                 <div class="invalid-feedback">Enter your password too!</div>
                             </div>
-                            <div>
+                            {{-- <div>
                                 <!-- Default unchecked -->
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
                                     <label class="custom-control-label" for="defaultUnchecked">Remember me on this computer.</label>
                                 </div>
-                            </div>
+                            </div> --}}
                             <button onclick="authenticate()" class="btn btn-success btn-lg float-right" id="btnLogin">Login</button>
                         </div>
                     </div>

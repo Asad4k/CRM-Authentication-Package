@@ -84,6 +84,10 @@ class User extends Model
             }
 
         } else {
+            $user = User::where('user_id', '=', $authenticated['user']['id'])->first();
+            if($user) {
+                $user->delete();
+            }
             return 'false';
         }
     }
@@ -95,7 +99,7 @@ class User extends Model
         $user->first_name = $authenticated['user']['firstName'];
         $user->last_name = $authenticated['user']['lastName'];
         $user->email = $authenticated['user']['emailAddress'];
-        $user->role = $authenticated['user']['isAdmin'] == true ? 'user' : 'admin';
+        $user->role = $authenticated['user']['isAdmin'] == true ? 'admin' : 'user';
         $user->token = $token;
         $user->save();
     }
