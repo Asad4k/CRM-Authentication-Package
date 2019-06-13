@@ -1,7 +1,7 @@
 # CRM Authentication Package
 
 This package is for installing the CRM text-based authenticated into any of our laravel projects.
-If you have any errors throughout using this project, they may be listed here. https://cookbook.cyrexag.com/
+If you have any errors throughout using this project, they may be listed in my personal documentation here. https://cookbook.cyrexag.com/
 
 ### Prerequisites
 
