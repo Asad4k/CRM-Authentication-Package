@@ -7,7 +7,28 @@ This package is for installing the CRM text-based authenticated into any of our 
 This package has no dependencies, this package is created to be installed onto a new laravel 
 project without Laravel's Authentication installed. Although there will not be any conflicts with Laravels Authentication.
 
+#### New Project Instructions
+
+If your installing on a new project without the default Laravel Authentication there are a few things we need to remove from the project to ensure that its completely gone since laravel installs some of the authentication into the vanilla project.
+
+First remove the migrations from the database/migrations folder.
+```
+2014_10_12_000000_create_users_table.php
+2014_10_12_100000_create_password_resets_table.php
+```
+
+Then remove the User model in the App folder.
+```
+User.php
+```
+
+Lastly remove the api route 'api/user' in your routes/api.php.
+```
+User.php
+```
+
 ### Installing
+
 First you have to require the package with packagist and composer.
 ```
 composer require ajg/crm_authentication
@@ -46,6 +67,7 @@ php artisan view:cache
 ```
 
 ### Configuration
+
 Once installed you now have the full login system installed including middleware for the routes that need authorization.
 To access this middleware simply wrap your routes in the 'crm_authentication' middleware as seen below.
 ```
