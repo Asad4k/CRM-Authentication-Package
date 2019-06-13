@@ -79,3 +79,11 @@ Route::group(['middleware' => ['crm_authentication']], function () {
     });
 });
 ```
+
+You can also add new fields to the model without writing any code into the migrations pretty easily through the config/crm_authentication/main.php. Just add the name of your field under the type of value you want. 
+Make sure that after you edit you run a 'php artisan config:cache' to update your changes. 
+```
+'boolean' => [
+    'test1'
+],
+```
