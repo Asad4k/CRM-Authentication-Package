@@ -45,3 +45,13 @@ php artisan config:cache
 php artisan view:cache
 ```
 
+### Configuration
+Once installed you now have the full login system installed including middleware for the routes that need authorization.
+To access this middleware simply wrap your routes in the 'crm_authentication' middleware as seen below.
+```
+Route::group(['middleware' => ['crm_authentication']], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+});
+```
