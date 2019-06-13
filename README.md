@@ -24,7 +24,9 @@ User.php
 
 Lastly remove the api route 'api/user' in your routes/api.php.
 ```
-User.php
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 ```
 
 ### Installing
