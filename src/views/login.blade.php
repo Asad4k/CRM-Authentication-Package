@@ -79,7 +79,7 @@
                    }
                });
                 jQuery.ajax({
-                   url: "{{ url('/a' . config('crm_authentication.main.login_route')) }}",
+                   url: "{{'/a' . config('crm_authentication.main.login_route')}}",
                    method: 'post',
                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                    data: {
