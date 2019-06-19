@@ -17,20 +17,6 @@ class CrmAuthUsersTable extends Migration
             $table->string('email')->nullable();
             $table->string('role')->nullable();
             $table->string('token', 25)->nullable();
-            $extra_fields = config('crm_authentication.main.user_extra_fields');
-
-            for ($i=0; $i < count($extra_fields['boolean']); $i++) {
-                $table->boolean($extra_fields['boolean'][$i])->nullable();
-            }
-            for ($i=0; $i < count($extra_fields['string']); $i++) {
-                $table->string($extra_fields['string'][$i])->nullable();
-            }
-            for ($i=0; $i < count($extra_fields['longText']); $i++) {
-                $table->longText($extra_fields['longText'][$i])->nullable();
-            }
-            for ($i=0; $i < count($extra_fields['integer']); $i++) {
-                $table->integer($extra_fields['integer'][$i])->nullable();
-            }
             $table->timestamps();
         });
     }
