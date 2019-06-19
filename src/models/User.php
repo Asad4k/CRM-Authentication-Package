@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Str;
 
+use Session;
+
 // use GuzzleHttp\Exception\GuzzleException;
 // use GuzzleHttp\Client;
 
@@ -28,6 +30,12 @@ class User extends Model
         'role',
         'token'
     ];
+
+    public static function user() {
+        $user_id = Session::get("user_id");
+        $user = User::where('user_id', '=', $user_id)->first();
+        return($user);
+    }
 
     public function authenticate($username, $password) {
         $username = $this->secureString($username);
