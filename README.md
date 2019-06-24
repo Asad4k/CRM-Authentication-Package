@@ -37,7 +37,7 @@ return [
 5) Run the commands below just in case something got cached during the installation:
 
 ```shell
-php artisan vendor:publish
+php artisan optimize
 ```
 
 6) Then you want to migrate your database:
