@@ -71,7 +71,7 @@ class User extends Model
                 $user->first_name = $authenticated['user']['firstName'];
                 $user->last_name = $authenticated['user']['lastName'];
                 $user->email = $authenticated['user']['emailAddress'];
-                $user->role = $authenticated['user']['isAdmin'] == true ? 'user' : 'admin';
+                $user->role = $authenticated['user']['isAdmin'];
                 $user->token = $token;
                 $user->save();
 
@@ -107,7 +107,7 @@ class User extends Model
         $user->first_name = $authenticated['user']['firstName'];
         $user->last_name = $authenticated['user']['lastName'];
         $user->email = $authenticated['user']['emailAddress'];
-        $user->role = $authenticated['user']['isAdmin'] == true ? 'admin' : 'user';
+        $user->role = $authenticated['user']['isAdmin'];
         $user->token = $token;
         $user->save();
     }

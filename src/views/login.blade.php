@@ -17,6 +17,9 @@
                 display: flex;
                 align-items: center;
             }
+            .error {
+              color: red;
+            }
         </style>
     </head>
     <body class="bg-dark">
@@ -29,25 +32,19 @@
                         <h3 class="mb-0">Login</h3>
                     </div>
                     <div class="card-body">
-                        <div class="form">
+                          <div class="form">
                             <div class="form-group">
-                                <label for="uname1">Username</label>
-                                <input type="text" class="form-control form-control-lg rounded-0" name="uname1" id="usernameInput" required="">
-                                <div class="invalid-feedback">Oops, you missed this one.</div>
+                                <label>Username</label>
+                                <input type="text" class="form-control form-control-lg rounded-0" id="usernameInput" required="">
+                                <small class="error" id="usernameError" style="display:none;">Oops, you missed this one.</small>
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
                                 <input type="password" class="form-control form-control-lg rounded-0" id="passwordInput" required="" autocomplete="new-password">
-                                <div class="invalid-feedback">Enter your password too!</div>
+                                <small class="error" id="passwordError" style="display:none;">Enter your password too!</small>
                             </div>
-                            {{-- <div>
-                                <!-- Default unchecked -->
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-                                    <label class="custom-control-label" for="defaultUnchecked">Remember me on this computer.</label>
-                                </div>
-                            </div> --}}
-                            <button onclick="authenticate()" class="btn btn-success btn-lg float-right" id="btnLogin">Login</button>
+                            <small class="error" id="invalidError" style="display:none;">Incorrect username or password!</small>
+                            <button type="submit" onclick="authenticate()" class="btn btn-success btn-lg float-right" id="btnLogin">Login</button>
                         </div>
                     </div>
                     <!--/card-block-->
@@ -64,39 +61,79 @@
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
         <script type="text/javascript">
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+            $( document ).ready(function() {
+                              // Get the input field
+              var input1 = $("#usernameInput")[0];
+              var input2 = $("#passwordInput")[0];
+
+              // Execute a function when the user releases a key on the keyboard
+              input1.addEventListener("keyup", function(event) {
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                  // Cancel the default action, if needed
+                  event.preventDefault();
+                  // Trigger the button element with a click
+                  $('#btnLogin')[0].click();
                 }
+              }); 
+              // Execute a function when the user releases a key on the keyboard
+              input2.addEventListener("keyup", function(event) {
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                  // Cancel the default action, if needed
+                  event.preventDefault();
+                  // Trigger the button element with a click
+                  $('#btnLogin')[0].click();
+                }
+              }); 
             });
+
+
             function authenticate () {
                 let username = $('#usernameInput')[0].value;
                 let password = $('#passwordInput')[0].value;
-                // e.preventDefault();
-                $.ajaxSetup({
-                   headers: {
-                       'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                   }
-               });
-                jQuery.ajax({
-                   url: "{{'/a' . config('crm_authentication.main.login_route')}}",
-                   method: 'post',
-                   headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                   data: {
-                      "_token": "{{ csrf_token() }}",
-                      username: username,
-                      password: password
-                   },
-                   success: function(result){
-                       console.log(result);
-                       if(result == 'true') {
-                           window.location = "{!! config('crm_authentication.main.home_route') !!}"
-                       } else {
-                           console.log('failed login.');
-                       }
-                   }
-               });
-        	}
+
+                let usernameError = $('#usernameError')[0];
+                let passwordError = $('#passwordError')[0];
+                let invalidError = $('#invalidError')[0];
+
+                usernameError.style.display = "none";
+                passwordError.style.display = "none";
+                invalidError.style.display = "none";
+
+                if (username == "") {
+                    usernameError.style.display = "block";
+                } else {
+                  if (password == "") {
+                    passwordError.style.display = "block";
+                  } else {
+                      $.ajaxSetup({
+                         headers: {
+                             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                         }
+                     });
+                      jQuery.ajax({
+                         url: "{{'/a' . config('crm_authentication.main.login_route')}}",
+                         method: 'post',
+                         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                         data: {
+                            "_token": "{{ csrf_token() }}",
+                            username: username,
+                            password: password
+                         },
+                         success: function(result){
+                             if (result == 'true') {
+                                 window.location = "{!! config('crm_authentication.main.home_route') !!}"
+                             } else {
+                                 invalidError.style.display = "block";
+                             }
+                         }
+                     });
+                  }
+                }
+
+          }
         </script>
         <!--/container-->
 
